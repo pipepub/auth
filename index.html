@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PipePub Auth - OAuth Token Helper</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Style -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <!-- PipePub OAUTH2 service file: index.html -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-7">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="display-5 mb-2">
+                            <i class="bi bi-shield-lock"></i> PipePub Auth
+                        </h1>
+                        <p class="mb-0 opacity-75">Secure OAuth token helper for publishing platforms</p>
+                        <div id="testModeBadge"></div>
+                    </div>
+                    <div class="card-body px-4">                        
+                        <!-- Result Container - JS will populate content here -->
+                        <div id="resultContainer"></div>
+                        <!-- OAuth Form -->
+                        <form id="oauthForm">
+                            <div class="mb-2">
+                                <label class="form-label fw-semibold small">
+                                    <i class="bi bi-grid-3x3-gap-fill"></i> Select Platform
+                                </label>
+                                <select id="platform" class="form-select" required>
+                                    <option value="">Loading platforms...</option>
+                                </select>
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label fw-semibold small">
+                                    <i class="bi bi-key"></i> Your Client ID
+                                </label>
+                                <input type="text" id="clientId" class="form-control" required placeholder="Enter your OAuth client ID">
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label fw-semibold small">
+                                    <i class="bi bi-shield-lock"></i> Your Client Secret
+                                </label>
+                                <input type="password" id="clientSecret" class="form-control" required placeholder="Enter your OAuth client secret">
+                            </div>
+                            <!-- Info Box -->
+                            <button type="submit" class="btn btn-primary w-100 fw-semibold py-2">
+                                Authorize Application
+                            </button>
+                            <hr>
+                            <div class="info-box p-3" id="infoBox">
+                                <strong><i class="bi bi-info-circle"></i> How this works?</strong><br>
+                                <small class="fw-light fst-italic text-muted">Get your oauth info from your publisher platform</small><br>
+                                1. Select a platform and enter your OAuth credentials<br>
+                                2. Authorize PipePub on the platform's website<br>
+                                3. Copy the temporary code (valid for 10 minutes)<br>
+                                4. Run the Exchange Token workflow in <strong>your</strong> repository<br>
+                                <small class="fw-light fst-italic text-muted">Your information stays in your browser - we never see or save it</small><br>
+                            </div>
+                        </form>
+                        <!-- PipePub footer -->
+                        <hr>
+                        <div class="footer text-center mb-2">
+                            <p class="mb-4">
+                                <a href="https://github.com/pipepub/pipepub" title="PipePub main repository"><img src="https://pipepub.github.io/cdn/image/badge/logo/pipepub.svg" height="22" alt="PipePub main repository"></a>
+                                <a href="https://github.com/pipepub/pipepub/blob/main/README.md" title="PipePub readme doc"><img src="https://pipepub.github.io/cdn/image/badge/doc/readme.svg" height="22" alt="PipePub readme doc"></a>
+                                <a href="https://github.com/pipepub/pipepub/blob/main/docs/INDEX.md" title="PipePub docs index"><img src="https://pipepub.github.io/cdn/image/badge/doc/index.svg" height="22" alt="PipePub docs index"></a>
+                                <a href="https://github.com/pipepub/pipepub/blob/main/CHANGELOG.md" title="PipePub version"><img src="https://pipepub.github.io/cdn/image/badge/version/current.svg" height="22" alt="PipePub version"></a>
+                                <a href="https://github.com/pipepub/pipepub/blob/main/LICENSE" title="PipePub license"><img src="https://pipepub.github.io/cdn/image/badge/license/current.svg" height="22" alt="PipePub license"></a>
+                            </p>
+                            <a href="https://github.com/pipepub" title="PipePub - Publish like a PRO">
+                                <img src="https://pipepub.github.io/cdn/image/logo/pipepub.png" width="116" height="48" alt="PipePub - Publish like a PRO">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Success Template (hidden, used by JS) -->
+    <template id="successTemplate">
+        <div class="alert alert-success">
+            <h4 class="alert-heading"><i class="bi bi-check-circle-fill"></i> Authorization Code Generated</h4>
+            <p>Your temporary authorization code for <strong id="platformName"></strong></p>
+            <code class="result-code" id="authCode"></code>
+            <button class="btn btn-success" id="copyButton">
+                <i class="bi bi-clipboard"></i> Copy Code
+            </button>
+            <hr>
+            <h5>📋 Next Steps:</h5>
+            <ol class="mb-0" id="stepsList">
+                <li><strong>Copy the code above</strong></li>
+                <li>Go to <strong>your PipePub repository</strong> on GitHub</li>
+                <li>Navigate to <strong>Actions → "Exchange Token"</strong></li>
+                <li>Click <strong>Run workflow</strong></li>
+                <li>Select <strong id="stepPlatform"></strong></li>
+                <li><strong>Paste only the code</strong></li>
+                <li>Token will be saved as <strong><code id="secretName"></code></strong></li>
+            </ol>
+            <hr class="mb-0">
+            <small class="text-muted">⚠️ This code expires in 10 minutes and can only be used once.</small>
+        </div>
+    </template>
+    
+    <!-- Error Template (hidden, used by JS) -->
+    <template id="errorTemplate">
+        <div class="alert alert-danger">
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            <strong>Error</strong><br>
+            <span id="errorMessage"></span>
+        </div>
+    </template>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Auth module -->
+    <script src="assets/js/auth.js"></script>
+</body>
+</html>

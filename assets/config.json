@@ -1,0 +1,40 @@
+{
+    "_title": "PipePub v1.0.0 OAUTH2 config and services",
+    "_file": "/assets/config.json",
+    "_version": "1.0.0",
+    "public_key": "pipepub_v1_2026_04_30_secure_master_key",
+    "services": {
+        "XTwitter": {
+            "name": "X (Twitter)",
+            "secret_name": "TWITTER_TOKEN",
+            "authorize_url": "https://twitter.com/i/oauth2/authorize",
+            "token_url": "https://api.twitter.com/2/oauth2/token",
+            "scope": "tweet.write users.read offline.access",
+            "response_type": "code",
+            "supports_refresh": true,
+            "refresh_requires_offline_scope": true,
+            "access_token_lifetime_hours": 2
+        },
+        "Linkedin": {
+            "name": "LinkedIn",
+            "secret_name": "LINKEDIN_TOKEN",
+            "authorize_url": "https://www.linkedin.com/oauth/v2/authorization",
+            "token_url": "https://www.linkedin.com/oauth/v2/accessToken",
+            "scope": "w_member_social r_liteprofile",
+            "response_type": "code",
+            "supports_refresh": false,
+            "access_token_lifetime_days": 60,
+            "note": "Users must re-authenticate every 60 days via PipePub Auth"
+        },
+        "Medium": {
+            "name": "Medium",
+            "secret_name": "MEDIUM_TOKEN",
+            "authorize_url": "https://medium.com/oauth/authorize",
+            "token_url": "https://api.medium.com/v1/tokens",
+            "scope": "basicProfile publishPost",
+            "response_type": "code",
+            "supports_refresh": true,
+            "access_token_lifetime_days": 30
+        }
+    }
+}
