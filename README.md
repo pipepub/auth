@@ -49,6 +49,8 @@
 
 ## 🔐 PipePub Auth
 
+> *[https://auth.pipepub.com/](https://auth.pipepub.com/ "PipePub Auth")*
+
 Centralized OAuth helper service for PipePub - Publish like a PRO
 
 <br>
@@ -712,6 +714,8 @@ LinkedIn does not provide refresh tokens for standard apps:
 <a id="testing"></a>
 
 ## 🧪 Testing
+
+> *[https://auth.pipepub.com/?test=true](https://auth.pipepub.com/?test=true "PipePub Auth Test")*
 
 PipePub Auth includes a **built-in mock OAuth server** for testing without real platform accounts.
 
