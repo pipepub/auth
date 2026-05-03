@@ -1,6 +1,6 @@
 <a id="top"></a>
 
-[![Publish like a PRO](https://pipepub.github.io/cdn/image/logo/pipepub-full-right.png)](https://github.com/pipepub "PipeHub - Publish like a PRO")
+[![Publish like a PRO](https://pipepub.github.io/cdn/image/logo/pipepub-full-right.png)](https://github.com/pipepub "PipePub - Publish like a PRO")
 
 <details>
 <summary>ℹ️ <b>Information</b></summary>
@@ -755,9 +755,8 @@ The test environment uses `/assets/test.json` with three mock services:
 3. Enter any Client ID (e.g., test-client)
 4. Enter any Client Secret (e.g., test-secret)
 5. Click Authorize
-6. Mock page auto-approves after 3 seconds
-7. Copy the returned authorization code
-8. Use in your validator.yml workflow
+6. Copy the returned authorization code
+7. Use in your validator.yml workflow
 ```
 
 #### 2. PKCE Validation Test
@@ -896,7 +895,7 @@ This service does **not** store any OAuth credentials, tokens, or user data. All
 - 🔗 **Follow** [PipePub on GitHub](https://github.com/pipepub)
 - 📢 **Share** with fellow writers and devs
 
-**100% FREE**. PipeHub is open source and GitHub accounts are also free.
+**100% FREE**. PipePub is open source and GitHub accounts are also free.
 
 We kindly ask that you consider making a financial contribution to support this project.
 
