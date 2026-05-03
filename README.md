@@ -34,7 +34,6 @@
 | [🚀 Adding a New Platform](#adding-a-new-platform) |
 | [🧪 Testing](#testing) |
 | [🔧 Development](#development) |
-| [💬 Disclaimer](#disclaimer) |
 | [📢 Support this project](#support-this-project) |
 | [©️ Copyright](#copyright) |
 | [📄 License](#license) |
@@ -58,6 +57,8 @@ Centralized OAuth helper service for PipePub - Publish like a PRO
 <a id="overview"></a>
 
 ## 📋 Overview
+
+> *This service does **not** store any OAuth credentials, tokens, or user data. All sensitive information remains in the user's browser and their own GitHub repository.*
 
 PipePub Auth is a **centralized OAuth authorization helper** that generates temporary authorization codes for platforms requiring OAuth2 authentication. All PipePub users share this single service to obtain codes, which they then exchange for access tokens within their own GitHub repositories.
 
@@ -162,8 +163,9 @@ const state = btoa(JSON.stringify(stateObj));
 
 | Repository | Description |
 |------------|-------------|
-| [pipepub/pipepub](https://github.com/pipepub/pipepub) | Main PipePub pipeline |
-| [pipepub/auth](https://github.com/pipepub/auth) | This repository - OAuth helper |
+| [![pipepub/auth](https://pipepub.github.io/cdn/image/badge/repo/auth.svg)](https://github.com/pipepub/auth "pipepub/auth") | This repository - OAuth service (WIP) |
+| [![pipepub/cdn](https://pipepub.github.io/cdn/image/badge/repo/cdn.svg)](https://github.com/pipepub/cdn "pipepub/cdn") | Centralized assets (logos, screenshots, badges) |
+| [![pipepub/pipepub](https://pipepub.github.io/cdn/image/badge/repo/pipepub.svg)](https://github.com/pipepub/pipepub "pipepub/pipepub") | PipePub core — the pipeline |
 
 <br>
 
@@ -883,21 +885,13 @@ npx serve .
 
 <br>
 
-<a id="disclaimer"></a>
-
-## 💬 Disclaimer
-
-This service does **not** store any OAuth credentials, tokens, or user data. All sensitive information remains in the user's browser and their own GitHub repository.
-
-<br>
-
 <a id="support-this-project"></a>
 
 ## 📢 Support this project
 
 - ⭐ **Star** this repository
 - 🔗 **Follow** [PipePub on GitHub](https://github.com/pipepub)
-- 📢 **Share** with fellow writers and devs
+- 💬 **Share** with fellow writers and devs
 
 **100% FREE**. PipePub is open source and GitHub accounts are also free.
 
